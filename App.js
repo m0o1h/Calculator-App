@@ -1,20 +1,24 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React,{useState} from 'react';
+import { View } from 'react-native'
+import MainScreen from './Views/MainScreen';
+import IntroScreen from './Views/IntroScreen';
+import { ExternalStyle } from './ExternalStyle';
+import { RecoilRoot } from 'recoil';
 
-export default function App() {
+const App = () => {
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  setTimeout(() => {
+    setIsLoaded(true)
+  }, 2000);
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
+    <RecoilRoot>
+    <View style={ExternalStyle.container} >
+      {isLoaded?<MainScreen />:<IntroScreen />}
     </View>
-  );
+    </RecoilRoot>
+  )
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+export default App
